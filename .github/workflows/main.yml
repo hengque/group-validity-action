@@ -1,0 +1,30 @@
+name: Group validity check
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  pull_request:
+env:
+    # Only folders descendant to this folder are considered a valid place for student submissions.
+    baseFolder: contributions/
+    maxGroupSize: 3
+    # The maximum number of times the same group is allowed to work together (this includes groups of only a single person).
+    maxCollaborationTimes: 2 
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Get file added in the pullrequest
+        id: file_changes
+        uses: trilom/file-changes-action@v1.2.3
+      - uses: EleonoraBorzis/group-validity-action@master
+        with: 
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          payload: $GITHUB_EVENT_PATH
+          filesAdded: ${{ steps.file_changes.outputs.files_added}}
+          basefolder: $baseFolder
+          maxGroupSize: $maxGroupSize
+          maxCollaborationTimes: $maxCollaborationTimes
+
+          
+
