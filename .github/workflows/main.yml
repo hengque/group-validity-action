@@ -1,7 +1,7 @@
 name: Group validity check
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
-  pull_request:
+  pull_request_target:
 env:
     # Only folders descendant to this folder are considered a valid place for student submissions.
     baseFolder: contributions/
