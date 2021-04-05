@@ -17,7 +17,7 @@ jobs:
       - name: Get file added in the pullrequest
         id: file_changes
         uses: trilom/file-changes-action@v1.2.3
-      - uses: EleonoraBorzis/group-validity-action@master
+      - uses: EleonoraBorzis/group-validity-action@python-script
         with: 
           github-token: ${{ secrets.GITHUB_TOKEN }}
           payload: $GITHUB_EVENT_PATH
