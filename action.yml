@@ -27,9 +27,10 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
+   - ${{ inputs.github-token }}
    - ${{ inputs.payload }}
    - ${{ inputs.filesAdded }}
    - ${{ inputs.basefolder }}
    - ${{ inputs.maxGroupSize }}
    - ${{ inputs.maxCollaborationTimes }}
-  #  - ${{ inputs.github-token }}
+  
