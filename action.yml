@@ -1,0 +1,36 @@
+name: Group Validity Action
+description: Check if the group composition follows the requirements described on https://github.com/KTH/devops-course
+inputs: 
+  payload: 
+    description: Json payload with all the information of the pull request
+    required: true
+  filesAdded:
+    description: Files added in the pullrequest
+    required: true
+  basefolder: 
+    description: Only folders descendant to this folder are considered a valid place for student submissions
+    default: contributions/
+    required: true
+  maxGroupSize:
+    description: Max number of people working in a group
+    default: 3
+    required: true
+  maxCollaborationTimes:
+    description: The maximum number of times the same group is allowed to work together (this includes groups of only a single person)
+    default: 2
+    required: true
+#  github-token:
+#    default: ${{ github.token }}
+#    required: true
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+   - ${{ inputs.github-token }}
+   - ${{ inputs.payload }}
+   - ${{ inputs.filesAdded }}
+   - ${{ inputs.basefolder }}
+   - ${{ inputs.maxGroupSize }}
+   - ${{ inputs.maxCollaborationTimes }}
+  
